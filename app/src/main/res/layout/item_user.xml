@@ -1,32 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:layout_marginBottom="4dp">
 
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:padding="4dp"
-        android:id="@+id/name"/>
+        android:layout_toStartOf="@+id/delete"
+        android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:padding="4dp"
+            android:id="@+id/name"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:padding="4dp"
+            android:id="@+id/email"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:padding="4dp"
+            android:id="@+id/age"/>
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:padding="4dp"
-        android:id="@+id/email"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:padding="4dp"
-        android:id="@+id/age"/>
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:text="delete"
+        android:id="@+id/delete"/>
 
 
 
-</LinearLayout>
+
+
+</RelativeLayout>

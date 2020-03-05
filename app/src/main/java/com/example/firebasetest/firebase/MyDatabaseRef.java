@@ -5,10 +5,10 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class MyDatabaseRef {
 
-    private static final String USERS_REF="users";
+    private static final String USERS_REF="Users";
     private static final String PRODUCTS_REF="products";
 
-    private static MyDatabaseRef instance;
+    private static MyDatabaseRef myDatabaseRef;
 
     private FirebaseDatabase database;
 
@@ -17,10 +17,10 @@ public class MyDatabaseRef {
     }
 
     public static MyDatabaseRef getInstance() {
-        if (instance == null) {
-            instance = new MyDatabaseRef();
+        if (myDatabaseRef == null) {
+            myDatabaseRef = new MyDatabaseRef();
         }
-        return instance;
+        return myDatabaseRef;
     }
 
 

@@ -5,13 +5,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.firebasetest.R;
+import com.example.firebasetest.firebase.MyDatabaseRef;
 import com.example.firebasetest.models.User;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,9 +94,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
     }
 
 
-    class UserHolder extends RecyclerView.ViewHolder{
+    class UserHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView tvName,tvEmail,tvAge;
+        Button btnDelete;
 
         public UserHolder(@NonNull View itemView) {
             super(itemView);
@@ -99,6 +105,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
             tvName = itemView.findViewById(R.id.name);
             tvEmail = itemView.findViewById(R.id.email);
             tvAge = itemView.findViewById(R.id.age);
+            btnDelete = itemView.findViewById(R.id.delete);
+
+            btnDelete.setOnClickListener(this);
         }
 
 
@@ -106,6 +115,19 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
             tvName.setText(user.getName());
             tvEmail.setText(user.getEmail());
             tvAge.setText(String.valueOf(user.getAge()));
+        }
+
+        @Override
+        public void onClick(View v) {
+            Log.d("UUUUUU","HHHHH");
+            User user = userList.get(getAdapterPosition());
+            MyDatabaseRef.getInstance().getUserRef().child(user.getId()).setValue(null, new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+//                    Log.d("UUUUUU",databaseError.getMessage()+"");
+                    Log.d("UUUUUU",databaseReference.getKey()+"");
+                }
+            });
         }
     }
 }
