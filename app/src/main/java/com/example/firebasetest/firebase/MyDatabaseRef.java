@@ -5,7 +5,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class MyDatabaseRef {
 
-    private static final String USERS_REF="Users";
+    private static final String USERS_REF="users";
     private static final String PRODUCTS_REF="products";
 
     private static MyDatabaseRef myDatabaseRef;

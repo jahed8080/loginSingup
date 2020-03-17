@@ -2,7 +2,6 @@ package com.example.firebasetest.ui.login;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,16 +14,13 @@ import android.widget.Toast;
 import com.example.firebasetest.R;
 import com.example.firebasetest.firebase.MyDatabaseRef;
 import com.example.firebasetest.models.User;
-import com.example.firebasetest.ui.MainActivity;
+import com.example.firebasetest.ui.main.MainActivity;
 import com.example.firebasetest.ui.signup.SignupActivity;
 import com.example.firebasetest.utils.BaseActivity;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -118,11 +114,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                     FirebaseUser firebaseUser = task.getResult().getUser();
 
                                     User user = new User();
-                                    user.setId(firebaseUser.getUid());
+                                    user.setUid(firebaseUser.getUid());
                                     user.setName(firebaseUser.getDisplayName());
                                     user.setEmail(firebaseUser.getEmail());
 
-                                    MyDatabaseRef.getInstance().getUserRef().child(user.getId())
+                                    MyDatabaseRef.getInstance().getUserRef().child(user.getUid())
                                             .setValue(user, new DatabaseReference.CompletionListener() {
                                                 @Override
                                                 public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {

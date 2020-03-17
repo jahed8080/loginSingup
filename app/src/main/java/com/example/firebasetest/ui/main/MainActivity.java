@@ -1,6 +1,4 @@
-package com.example.firebasetest.ui;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.firebasetest.ui.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,13 +9,12 @@ import android.widget.EditText;
 
 import com.example.firebasetest.R;
 import com.example.firebasetest.firebase.MyDatabaseRef;
-import com.example.firebasetest.models.Product;
 import com.example.firebasetest.models.User;
+import com.example.firebasetest.ui.users.UsersActivity;
 import com.example.firebasetest.ui.login.LoginActivity;
 import com.example.firebasetest.utils.BaseActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
@@ -76,7 +73,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             DatabaseReference userRef = MyDatabaseRef.getInstance().getUserRef();
 
             String key = userRef.push().getKey();
-            user.setId(key);
+            user.setUid(key);
             userRef.child(key).setValue(user);
 
 
@@ -86,7 +83,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 //
 //            MyDatabaseRef.getInstance().getProductsRef().push().setValue(product);
         }else if(v==btnSecondActivity){
-            startActivity(new Intent(getApplicationContext(),UsersActivity.class));
+            startActivity(new Intent(getApplicationContext(), UsersActivity.class));
         }else if(v==btnLOgout){
             FirebaseAuth.getInstance().signOut();
             googleSignOut();

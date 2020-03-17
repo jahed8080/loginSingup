@@ -1,4 +1,4 @@
-package com.example.firebasetest.ui;
+package com.example.firebasetest.ui.users;
 
 import android.content.Context;
 import android.util.Log;
@@ -28,12 +28,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
     private List<User> userList;
 
     private UserHandler handler;
+    private UsersContract.View mView;
 
-    public UserAdapter(Context context) {
+    public UserAdapter(Context context, UsersContract.View mView) {
         this.context = context;
         this.inflater = LayoutInflater.from(context);
         this.userList = new ArrayList<>();
         this.handler = new UserHandler(this);
+        this.mView = mView;
     }
 
     @NonNull
@@ -63,8 +65,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
 
     public void addUser(User user){
         handler.addUser(user);
+    }
 
-
+    public void addUsers(List<User> userList){
+        this.userList = userList;
+        notifyDataSetChanged();
 
     }
 
@@ -86,7 +91,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
 
     private int getPosition(User user){
         for (User x: userList){
-            if(x.getId().equals(user.getId())){
+            if(x.getUid().equals(user.getUid())){
                 return userList.indexOf(x);
             }
         }
@@ -121,13 +126,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
         public void onClick(View v) {
             Log.d("UUUUUU","HHHHH");
             User user = userList.get(getAdapterPosition());
-            MyDatabaseRef.getInstance().getUserRef().child(user.getId()).setValue(null, new DatabaseReference.CompletionListener() {
-                @Override
-                public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-//                    Log.d("UUUUUU",databaseError.getMessage()+"");
-                    Log.d("UUUUUU",databaseReference.getKey()+"");
-                }
-            });
+            mView.deleteUser(user);
         }
     }
 }

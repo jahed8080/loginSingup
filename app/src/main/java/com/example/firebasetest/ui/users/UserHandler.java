@@ -1,8 +1,7 @@
-package com.example.firebasetest.ui;
+package com.example.firebasetest.ui.users;
 
 import com.example.firebasetest.models.User;
-
-import java.util.List;
+import com.example.firebasetest.ui.users.UserAdapter;
 
 public class UserHandler {
 
